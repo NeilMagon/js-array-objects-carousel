@@ -49,14 +49,16 @@ const images = [
     }
 ];
 
+// Creo le variabili per selezionare i container
 const bigContainer = document.querySelector('#big-container');
 const smallContainer = document.querySelector('#thumbnails-container');
 
+// Ciclo per creare e inserire gli elementi dell'array nel dom
 images.forEach(element => {
     const bigImage = `
     <div class="image">
         <img src="${element.image}" alt="">
-        <div class="position-absolute bottom-0 end-0 text-white px-2">
+        <div class="position-absolute bottom-0 start-0 text-white px-4 pb-3">
             <h4>${element.title}</h4>
             <p>${element.text}.</p>
         </div>
@@ -72,11 +74,43 @@ images.forEach(element => {
     smallContainer.innerHTML += smallImage;
 });
 
+// Creo una variabile  che prende l'immagine di copertina e del carosello
 let activeItem = 0;
 
+//  Assegno all'immagine di copertina e alla corrispondente nel carosello la classe active
 const allImage = document.querySelectorAll(`.image`);
+allImage[activeItem].classList.add('active');
 
 const thumbnailsImage = document.querySelectorAll('.ms-thumbnails');
-
-allImage[activeItem].classList.add('active');
 thumbnailsImage[activeItem].classList.add('active');
+
+// Funzioni per far cambiare  l'immagine di copertina e del carosello
+const nextArrow = document.querySelector('.ms-next');
+nextArrow.addEventListener('click', function() {
+    document.querySelector('.image.active').classList.remove('active');
+    document.querySelector('.ms-thumbnails.active').classList.remove('active');
+
+    if(activeItem < allImage.length - 1) {
+        activeItem++;
+    } else {
+        activeItem = 0;
+    }
+
+    allImage[activeItem].classList.add('active');
+    thumbnailsImage[activeItem].classList.add('active');
+});
+
+const previousArrow = document.querySelector('.ms-previous');
+previousArrow.addEventListener('click', function() {
+    document.querySelector('.image.active').classList.remove('active');
+    document.querySelector('.ms-thumbnails.active').classList.remove('active');
+
+    if(activeItem > 0) {
+        activeItem--;
+    } else {
+        activeItem = allImage.length - 1;
+    }
+
+    allImage[activeItem].classList.add('active');
+    thumbnailsImage[activeItem].classList.add('active');
+});
