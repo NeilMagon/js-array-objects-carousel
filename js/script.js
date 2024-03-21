@@ -5,7 +5,8 @@
 //  - descrizione
 // Creare un carosello come nella foto allegata.
 // Milestone 0:
-// Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico: costruiamo il container e inseriamo l'immagine grande in modo da poter stilare lo slider.
+// Come nel primo carosello realizzato, focalizziamoci prima sulla creazione del markup statico: 
+// costruiamo il container e inseriamo l'immagine grande in modo da poter stilare lo slider.
 // Milestone 1:
 // Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per 
 // popolare dinamicamente il carosello.
@@ -47,3 +48,24 @@ const images = [
         text: 'Marvel\'s Avengers is an epic, third-person, action-adventure game that combines an original, cinematic story with single-player and co-operative gameplay.',
     }
 ];
+
+const bigContainer = document.querySelector('#big-container');
+const  smallContainer = document.querySelector('#thumbnails-container');
+
+images.forEach(element => {
+    const bigImage = `
+    <img src="${element.image}" alt="">
+    <div class="position-absolute bottom-0 end-0 text-white px-2">
+        <h4>${element.title}</h4>
+        <p>${element.text}</p>
+    </div>`;
+
+    bigContainer.innerHTML += bigImage;
+
+    const smallImage = `
+    <div class="ms-thumbnails">
+        <img src="${element.image}" alt="">
+    </div>`;
+
+    smallContainer.innerHTML += bigImage;
+});
