@@ -50,14 +50,16 @@ const images = [
 ];
 
 const bigContainer = document.querySelector('#big-container');
-const  smallContainer = document.querySelector('#thumbnails-container');
+const smallContainer = document.querySelector('#thumbnails-container');
 
 images.forEach(element => {
     const bigImage = `
-    <img src="${element.image}" alt="">
-    <div class="position-absolute bottom-0 end-0 text-white px-2">
-        <h4>${element.title}</h4>
-        <p>${element.text}</p>
+    <div class="image">
+        <img src="${element.image}" alt="">
+        <div class="position-absolute bottom-0 end-0 text-white px-2">
+            <h4>${element.title}</h4>
+            <p>${element.text}.</p>
+        </div>
     </div>`;
 
     bigContainer.innerHTML += bigImage;
@@ -67,5 +69,14 @@ images.forEach(element => {
         <img src="${element.image}" alt="">
     </div>`;
 
-    smallContainer.innerHTML += bigImage;
+    smallContainer.innerHTML += smallImage;
 });
+
+let activeItem = 0;
+
+const allImage = document.querySelectorAll(`.image`);
+
+const thumbnailsImage = document.querySelectorAll('.ms-thumbnails');
+
+allImage[activeItem].classList.add('active');
+thumbnailsImage[activeItem].classList.add('active');
